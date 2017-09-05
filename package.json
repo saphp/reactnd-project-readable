@@ -1,7 +1,7 @@
 {
-  "name": "reddit-clone-server",
+  "name": "reactnd-project-readable",
   "version": "0.0.1",
-  "description": "A server for the Udacity Reddit Clone project for ReactND",
+  "private": true,
   "main": "index.js",
   "keywords": [
     "udacity",
@@ -17,9 +17,18 @@
     "dotenv": "^4.0.0",
     "express": "^4.15.2",
     "clone": "^2.1.1",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-scripts": "1.0.13",
     "redux": "^3.7.2",
     "react-redux": "^5.0.5",
     "react-router": "^4.1.1",
     "react-router-dom": "4.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   }
 }
