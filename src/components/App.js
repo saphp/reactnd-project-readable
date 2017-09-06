@@ -1,6 +1,13 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { fetchCategories } from '../actions'
 
 class App extends Component {
+  componentDidMount() {
+    const { dispatch } = this.props
+    dispatch(fetchCategories())
+  }
+
   render() {
     return (
       <div className="App">
@@ -15,4 +22,8 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = (state, props) => ({
+  categories: state.categories,
+});
+
+export default connect(mapStateToProps)(App);
