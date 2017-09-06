@@ -15,3 +15,9 @@ export function fetchCategories() {
 		.then(res => res.json())
 		.then(data => data.categories)
 }
+
+export function fetchPosts() {
+	return fetch(`${api}/posts`, { headers })
+		.then(res => res.json())
+		.then(data => data)
+}
