@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchCategories, fetchPosts } from '../actions'
+import { Container, Row, Col, Button } from 'reactstrap'
+import { Route, withRouter } from 'react-router-dom'
+import PostsList from './PostsList'
+import PostItem from './PostItem'
+import Navigation from './Navigation'
 
 class App extends Component {
   componentDidMount() {
@@ -11,25 +16,23 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <div className="App-header">
-          <h2>Readable</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <h5>Categories</h5>
-        <ul>
-          { this.props.categories.map((category) => (
-            <li key={category.path}>{ category.name }</li>
-          ))}
-        </ul>
-        <h5>Posts</h5>
-        <ul>
-          {this.props.posts.map((post) => (
-            <li key={post.id}>{post.title}</li>
-          ))}
-        </ul>
+      <div className="app">
+        <Navigation />
+        <Route exact path="/" component={PostsList} />
+        <Route path="/:category" component={PostsList} />
+        <Container>
+          <Row>
+            <Col sm="10">
+              <h5>Posts</h5>
+              {this.props.posts.map((post) => (
+                <PostItem key={post.id} post={post} />
+              ))}
+            </Col>
+            <Col sm="2">
+              <Button color="primary" block>Add New Post</Button>
+            </Col>
+          </Row>
+        </Container>
       </div>
     );
   }
@@ -40,4 +43,4 @@ const mapStateToProps = (state, props) => ({
   posts: state.posts.items,
 });
 
-export default connect(mapStateToProps)(App);
+export default withRouter(connect(mapStateToProps)(App));
