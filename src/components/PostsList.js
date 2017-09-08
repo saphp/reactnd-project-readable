@@ -2,8 +2,22 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PostItem from './PostItem'
 import map from 'lodash/map'
+import sortBy from 'sort-by'
 
 class PostsList extends Component {
+	constructor(props) {
+		super(props);
+
+		this.handleSorting = this.handleSorting.bind(this);
+		this.state = {
+			sortedBy: '-timestamp'
+		};
+	}
+
+	handleSorting(e) {
+		this.setState({ sortedBy: e.target.value})
+	}
+
 	render() {
 		const category = this.props.match.params['category']
 		let posts = this.props.posts
@@ -12,8 +26,20 @@ class PostsList extends Component {
 		}
 		return (
 			<div>
-				<h5>Posts</h5>
-				{posts.map((post) => (
+				<h5>
+					Posts
+					<div className="float-right">
+						<small>
+						Sort By: <select onChange={this.handleSorting} value={this.state.sortedBy}>
+								<option value="-timestamp">Newest Items</option>
+								<option value="timestamp">Oldest Items</option>
+								<option value="-voteScore">Highest Votes</option>
+								<option value="voteScore">Lowest Votes</option>
+						</select>
+						</small>
+					</div>
+				</h5>
+				{posts.sort(sortBy(this.state.sortedBy)).map((post) => (
 					<PostItem key={post.id} post={post} />
 				))}
 			</div>
