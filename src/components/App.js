@@ -18,15 +18,11 @@ class App extends Component {
     return (
       <div className="app">
         <Navigation />
-        <Route exact path="/" component={PostsList} />
-        <Route path="/:category" component={PostsList} />
         <Container>
           <Row>
             <Col sm="10">
-              <h5>Posts</h5>
-              {this.props.posts.map((post) => (
-                <PostItem key={post.id} post={post} />
-              ))}
+              <Route exact path="/" component={PostsList} />
+              <Route path="/:category" component={PostsList} />
             </Col>
             <Col sm="2">
               <Button color="primary" block>Add New Post</Button>

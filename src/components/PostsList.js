@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PostItem from './PostItem'
+import map from 'lodash/map'
 
 class PostsList extends Component {
 	render() {
@@ -21,7 +22,7 @@ class PostsList extends Component {
 }
 
 const mapStateToProps = (state, props) => ({
-	posts: state.posts.items,
+	posts: map(state.posts.items),
 })
 
 export default connect(mapStateToProps)(PostsList);

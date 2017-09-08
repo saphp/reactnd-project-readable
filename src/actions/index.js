@@ -2,31 +2,35 @@ import * as API from '../utils/api'
 
 export const RECEIVE_CATEGORIES = 'REVEIVE_CATEGORIES'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
-
-export const receiveCategories = categories => ({
-	type: RECEIVE_CATEGORIES,
-	categories
-});
+export const VOTE_POST = 'VOTE_POST'
 
 export const fetchCategories = () => (dispatch, getState) => {
 	const state = getState()
 	if (state.categories.isFetched === false) {
 		return API
 			.fetchCategories()
-			.then(categories => dispatch(receiveCategories(categories)))
+			.then(categories => dispatch({
+				type: RECEIVE_CATEGORIES,
+				categories
+			}))
 	}
 };
-
-export const receivePosts = posts => ({
-	type: RECEIVE_POSTS,
-	posts
-});
 
 export const fetchPosts = () => (dispatch, getState) => {
 	const state = getState()
 	if (state.posts.isFetched === false) {
 		return API
 			.fetchPosts()
-			.then(posts => dispatch(receivePosts(posts)))
+			.then(posts => dispatch({
+				type: RECEIVE_POSTS,
+				posts
+			}))
 	}
 };
+
+export const votePost = (post, option) => (dispatch) => {
+	return API.votePost(post, option).then(res => dispatch({
+		type: VOTE_POST,
+		post: res
+	}))
+}

@@ -21,3 +21,14 @@ export function fetchPosts() {
 		.then(res => res.json())
 		.then(data => data)
 }
+
+export function votePost(post, option) {
+	return fetch(`${api}/posts/${post.id}`, {
+		method: 'POST',
+		headers: {
+			...headers,
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({ option })
+	}).then(res => res.json())
+}
