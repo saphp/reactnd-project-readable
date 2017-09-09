@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Row, Col } from 'reactstrap'
 import { connect } from 'react-redux'
 import { votePost } from '../actions'
 import { Link } from 'react-router-dom'

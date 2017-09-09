@@ -38,3 +38,14 @@ export function fetchComments (post) {
 		.then(res => res.json())
 		.then(data => data)
 }
+
+export function voteComment(comment, option) {
+	return fetch(`${api}/comments/${comment.id}`, {
+		method: 'POST',
+		headers: {
+			...headers,
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify({ option })
+	}).then(res => res.json())
+}

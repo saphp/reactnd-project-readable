@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Voter from './Voter'
+import CommentsList from './CommentsList'
 import { votePost } from '../actions'
 import Moment from 'react-moment'
+import map from 'lodash/map'
 
 class Post extends Component {
 	getPost() {
@@ -21,12 +23,13 @@ class Post extends Component {
 							<Voter action={votePost} item={post} />
 							<span style={{ marginLeft: '.75rem' }}>{post.title}</span>
 						</h5>
-						<p class="card-text">{ post.body }</p>
+						<p className="card-text">{ post.body }</p>
 					</div>
 					<div className="card-footer">
 						<small className="text-muted">submitted <Moment fromNow>{post.timestamp}</Moment> by {post.author}</small>
 					</div>
 				</div>
+				{ post.comments && <CommentsList comments={map(post.comments)} />}
 			</div>
 		)
 	}

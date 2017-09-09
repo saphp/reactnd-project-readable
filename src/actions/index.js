@@ -4,6 +4,7 @@ export const RECEIVE_CATEGORIES = 'REVEIVE_CATEGORIES'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const VOTE_POST = 'VOTE_POST'
 export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
+export const VOTE_COMMENT = 'VOTE_COMMENT'
 
 export const fetchCategories = () => (dispatch, getState) => {
 	const state = getState()
@@ -45,4 +46,11 @@ export const fetchComments = (post) => (dispatch, getState) => {
 			comments
 		}))
 	}
+}
+
+export const voteComment = (comment, option) => (dispatch) => {
+	return API.voteComment(comment, option).then(res => dispatch({
+		type: VOTE_COMMENT,
+		comment: res
+	}))
 }
