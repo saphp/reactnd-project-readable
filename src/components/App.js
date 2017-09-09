@@ -4,8 +4,8 @@ import { fetchCategories, fetchPosts } from '../actions'
 import { Container, Row, Col, Button } from 'reactstrap'
 import { Route, withRouter } from 'react-router-dom'
 import PostsList from './PostsList'
-import PostItem from './PostItem'
 import Navigation from './Navigation'
+import Post from './Post'
 
 class App extends Component {
   componentDidMount() {
@@ -22,7 +22,8 @@ class App extends Component {
           <Row>
             <Col sm="10">
               <Route exact path="/" component={PostsList} />
-              <Route path="/:category" component={PostsList} />
+              <Route exact path="/:category" component={PostsList} />
+              <Route path="/:category/:post_id" component={Post} />
             </Col>
             <Col sm="2">
               <Button color="primary" block>Add New Post</Button>

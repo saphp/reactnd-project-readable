@@ -30,14 +30,18 @@ class PostsList extends Component {
 					Posts
 					<div className="float-right">
 						<small>
-						Sort By: <select onChange={this.handleSorting} value={this.state.sortedBy}>
-								<option value="-timestamp">Newest Items</option>
-								<option value="timestamp">Oldest Items</option>
-								<option value="-voteScore">Highest Votes</option>
-								<option value="voteScore">Lowest Votes</option>
-						</select>
+							<form className="form-inline">
+								<label>Sort By:</label>
+								<select className="form-control" onChange={this.handleSorting} value={this.state.sortedBy}>
+									<option value="-timestamp">Newest Items</option>
+									<option value="timestamp">Oldest Items</option>
+									<option value="-voteScore">Highest Votes</option>
+									<option value="voteScore">Lowest Votes</option>
+								</select>
+							</form>
 						</small>
 					</div>
+					<div className="clearfix"></div>
 				</h5>
 				{posts.sort(sortBy(this.state.sortedBy)).map((post) => (
 					<PostItem key={post.id} post={post} />
