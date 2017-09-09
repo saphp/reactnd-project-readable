@@ -19,7 +19,7 @@ export function fetchCategories() {
 export function fetchPosts() {
 	return fetch(`${api}/posts`, { headers })
 		.then(res => res.json())
-		.then(data => data)
+		.then(posts => posts)
 }
 
 export function votePost(post, option) {
@@ -31,4 +31,10 @@ export function votePost(post, option) {
 		},
 		body: JSON.stringify({ option })
 	}).then(res => res.json())
+}
+
+export function fetchComments (post) {
+	return fetch(`${api}/posts/${post.id}/comments`, { headers })
+		.then(res => res.json())
+		.then(data => data)
 }

@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchCategories, fetchPosts } from '../actions'
+import { fetchCategories, fetchPosts, fetchComments } from '../actions'
 import { Container, Row, Col, Button } from 'reactstrap'
 import { Route, withRouter } from 'react-router-dom'
 import PostsList from './PostsList'
 import Navigation from './Navigation'
 import Post from './Post'
+import map from 'lodash/map'
 
 class App extends Component {
   componentDidMount() {
@@ -15,6 +16,11 @@ class App extends Component {
   }
 
   render() {
+    if (this.props.posts) {
+      map(this.props.posts, (post) => {
+        this.props.dispatch(fetchComments(post))
+      })
+    }
     return (
       <div className="app">
         <Navigation />

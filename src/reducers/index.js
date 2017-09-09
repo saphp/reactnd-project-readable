@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import { RECEIVE_CATEGORIES, RECEIVE_POSTS, VOTE_POST } from '../actions'
+import { RECEIVE_CATEGORIES, RECEIVE_POSTS, VOTE_POST, RECEIVE_COMMENTS } from '../actions'
 import mapKeys from 'lodash/mapKeys'
 
 function categories (state = { isFetched: false, items: [] }, action) {
@@ -24,14 +24,24 @@ function posts (state = { isFetched: false, items: [] }, action) {
 				items: mapKeys(action.posts, 'id')
 			}
 		case VOTE_POST:
-			const post = action.post
 			return {
 				...state,
 				items: {
 					...state.items,
-					[post.id]: {
-						...state.items[post.id],
-						voteScore: post.voteScore
+					[action.post.id]: {
+						...state.items[action.post.id],
+						voteScore: action.post.voteScore
+					}
+				}
+			}
+		case RECEIVE_COMMENTS:
+			return {
+				...state,
+				items: {
+					...state.items,
+					[action.post.id]: {
+						...state.items[action.post.id],
+						comments: action.comments
 					}
 				}
 			}

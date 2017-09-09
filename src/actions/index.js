@@ -3,6 +3,7 @@ import * as API from '../utils/api'
 export const RECEIVE_CATEGORIES = 'REVEIVE_CATEGORIES'
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const VOTE_POST = 'VOTE_POST'
+export const RECEIVE_COMMENTS = 'RECEIVE_COMMENTS'
 
 export const fetchCategories = () => (dispatch, getState) => {
 	const state = getState()
@@ -33,4 +34,15 @@ export const votePost = (post, option) => (dispatch) => {
 		type: VOTE_POST,
 		post: res
 	}))
+}
+
+export const fetchComments = (post) => (dispatch, getState) => {
+	const state = getState()
+	if (state.posts.items[post.id].comments === undefined) {
+		return API.fetchComments(post).then(comments => dispatch({
+			type: RECEIVE_COMMENTS,
+			post,
+			comments
+		}))
+	}
 }

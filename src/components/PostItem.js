@@ -20,6 +20,7 @@ class PostItem extends Component {
 					</div>
 					<div className="card-footer">
 						<small className="text-muted">submitted <Moment fromNow>{post.timestamp}</Moment> by { post.author }</small>
+						<small className="text-muted float-right">({post.comments && post.comments.length}) Comments</small>
 					</div>
 				</div>
 			</div>
