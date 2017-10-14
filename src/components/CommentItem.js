@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { voteComment } from '../actions'
+import EditComment from './EditComment'
 import Voter from './Voter'
 import Moment from 'react-moment'
 
@@ -18,6 +19,9 @@ class CommentItem extends Component {
 					</div>
 					<div className="card-footer">
 						<small className="text-muted">submitted <Moment fromNow>{comment.timestamp}</Moment> by {comment.author }</small>
+						<div className="float-right">
+							<EditComment {...this.props} />
+						</div>
 					</div>
 				</div>
 			</div>

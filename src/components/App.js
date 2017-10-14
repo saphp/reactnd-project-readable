@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchCategories, fetchPosts, fetchComments } from '../actions'
-import { Container, Row, Col, Button } from 'reactstrap'
+import { Container, Row, Col } from 'reactstrap'
 import { Route, withRouter } from 'react-router-dom'
 import PostsList from './PostsList'
 import Navigation from './Navigation'
 import Post from './Post'
+import AddPost from './AddPost'
 import map from 'lodash/map'
 
 class App extends Component {
+
   componentDidMount() {
     const { dispatch } = this.props
     dispatch(fetchCategories())
@@ -29,10 +31,10 @@ class App extends Component {
             <Col sm="10">
               <Route exact path="/" component={PostsList} />
               <Route exact path="/:category" component={PostsList} />
-              <Route path="/:category/:post_id" component={Post} />
+              <Route path="/:category/:post_id/:action?/:comment_id?" component={Post} />
             </Col>
             <Col sm="2">
-              <Button color="primary" block>Add New Post</Button>
+              <AddPost />
             </Col>
           </Row>
         </Container>

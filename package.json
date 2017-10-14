@@ -18,6 +18,7 @@
     "cors": "^2.8.3",
     "dotenv": "^4.0.0",
     "express": "^4.15.2",
+    "form-serialize": "0.7.2",
     "lodash": "4.17.4",
     "moment": "2.18.1",
     "react": "^15.6.1",
@@ -33,7 +34,8 @@
     "reactstrap": "4.8.0",
     "redux": "^3.7.2",
     "redux-thunk": "2.2.0",
-    "sort-by": "1.2.0"
+    "sort-by": "1.2.0",
+    "uuid": "3.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
