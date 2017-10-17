@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux'
-import { RECEIVE_CATEGORIES, RECEIVE_POSTS, VOTE_POST, RECEIVE_COMMENTS, VOTE_COMMENT, TOGGLE_ADD_POST, ADD_POST, EDIT_POST, DELETE_POST, ADD_COMMENT, EDIT_COMMENT, DELETE_COMMENT } from '../actions'
+import * as types from '../actions/types'
 import { mapKeys, omit } from 'lodash'
 
 function categories (state = { isFetched: false, items: [] }, action) {
     switch (action.type) {
-        case RECEIVE_CATEGORIES:
+        case types.RECEIVE_CATEGORIES:
             return {
                 ...state,
                 isFetched: true,
@@ -17,13 +17,13 @@ function categories (state = { isFetched: false, items: [] }, action) {
 
 function posts (state = { isFetched: false, items: [] }, action) {
     switch (action.type) {
-        case RECEIVE_POSTS:
+        case types.RECEIVE_POSTS:
             return {
                 ...state,
                 isFetched: true,
                 items: mapKeys(action.posts.filter((p) => p.deleted === false), 'id')
             }
-        case ADD_POST:
+        case types.ADD_POST:
             return {
                 ...state,
                 items: {
@@ -31,7 +31,7 @@ function posts (state = { isFetched: false, items: [] }, action) {
                     [action.post.id]: action.post
                 }
             }
-        case EDIT_POST:
+        case types.EDIT_POST:
             return {
                 ...state,
                 items: {
@@ -43,12 +43,12 @@ function posts (state = { isFetched: false, items: [] }, action) {
                     }
                 }
             }
-        case DELETE_POST:
+        case types.DELETE_POST:
             return {
                 ...state,
                 items: omit(state.items, action.post.id)
             }
-        case VOTE_POST:
+        case types.VOTE_POST:
             return {
                 ...state,
                 items: {
@@ -59,7 +59,7 @@ function posts (state = { isFetched: false, items: [] }, action) {
                     }
                 }
             }
-        case RECEIVE_COMMENTS:
+        case types.RECEIVE_COMMENTS:
             return {
                 ...state,
                 items: {
@@ -70,7 +70,7 @@ function posts (state = { isFetched: false, items: [] }, action) {
                     }
                 }
             }
-        case VOTE_COMMENT:
+        case types.VOTE_COMMENT:
             return {
                 ...state,
                 items: {
@@ -87,7 +87,7 @@ function posts (state = { isFetched: false, items: [] }, action) {
                     }
                 }
             }
-        case ADD_COMMENT:
+        case types.ADD_COMMENT:
             return {
                 ...state,
                 items: {
@@ -101,7 +101,7 @@ function posts (state = { isFetched: false, items: [] }, action) {
                     }
                 }
             }
-        case EDIT_COMMENT:
+        case types.EDIT_COMMENT:
             return {
                 ...state,
                 items: {
@@ -119,7 +119,7 @@ function posts (state = { isFetched: false, items: [] }, action) {
                     }
                 }
             }
-        case DELETE_COMMENT:
+        case types.DELETE_COMMENT:
             return {
                 ...state,
                 items: {
@@ -137,7 +137,7 @@ function posts (state = { isFetched: false, items: [] }, action) {
 
 function utils (state = { addPostWindow: false }, action) {
     switch (action.type) {
-        case TOGGLE_ADD_POST:
+        case types.TOGGLE_ADD_POST:
             return {
                 ...state,
                 addPostWindow: !state.addPostWindow
